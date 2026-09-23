@@ -12,3 +12,76 @@
 .button:focus-visible,.nav-cta:focus-visible,.filter:focus-visible{outline:2px solid var(--red);outline-offset:4px}
 .cta-section .button::before{background:rgba(215,53,46,.12)}
 @media (prefers-reduced-motion:reduce){.button,.nav-cta,.button::before,.nav-cta::before,.button span,.nav-cta span{transition:none}}
+
+/* Button hover color change + blink */
+.button-primary:hover,
+.nav-cta:hover,
+.cta-section .button:hover {
+  background-color: var(--ink);
+  color: #fff;
+  border-color: var(--ink);
+  animation: button-blink 1s ease-in-out infinite;
+}
+
+.button-primary:hover::before,
+.nav-cta:hover::before,
+.cta-section .button:hover::before {
+  background: rgba(215, 53, 46, .28);
+}
+
+@keyframes button-blink {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.35); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button-primary:hover,
+  .nav-cta:hover,
+  .cta-section .button:hover {
+    animation: none;
+  }
+}
+
+/* Apply the same hover interaction to navigation links */
+.site-nav > a:not(.nav-cta) {
+  position: relative;
+  padding: 11px 8px;
+  border-radius: 3px;
+  transition: transform .3s cubic-bezier(.22,1,.36,1), background-color .3s ease, color .3s ease, box-shadow .3s ease;
+}
+
+.site-nav > a:not(.nav-cta):hover {
+  background-color: var(--red);
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(0,0,0,.16);
+  animation: button-blink 1s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-nav > a:not(.nav-cta):hover {
+    animation: none;
+  }
+}
+
+/* Apply the same interaction to text action links */
+.text-link {
+  transition: color .3s ease, transform .3s cubic-bezier(.22,1,.36,1), border-color .3s ease, filter .3s ease;
+}
+
+.text-link:hover {
+  color: var(--red);
+  border-color: var(--red);
+  transform: translateY(-3px);
+  animation: button-blink 1s ease-in-out infinite;
+}
+
+.text-link:hover span {
+  transform: translate(4px,-4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-link:hover {
+    animation: none;
+  }
+}
