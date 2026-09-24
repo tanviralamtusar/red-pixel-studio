@@ -92,3 +92,7 @@
 .footer-credit{display:flex;justify-content:center;align-items:center;gap:12px;padding-top:18px;color:#73746f;font:10px var(--mono);text-transform:uppercase;letter-spacing:.06em}
 .credit-btn{display:inline-block;padding:7px 14px;border:1px solid var(--line);border-radius:999px;color:var(--paper);transition:background .25s,border-color .25s,color .25s}
 .credit-btn:hover,.credit-btn:focus-visible{background:var(--red);border-color:var(--red);color:#fff}
+
+.footer-divider{height:1px;margin-top:14px;background:var(--line)}
+.footer-grid>.footer-nav>a{width:max-content;transition:color .25s,transform .25s,text-shadow .25s}
+.footer-nav>a:hover,.footer-nav>a:focus-visible{color:var(--red);transform:translateX(6px);text-shadow:0 0 12px rgba(215,53,46,.7)}
