@@ -96,3 +96,10 @@
 .footer-divider{height:1px;margin-top:14px;background:var(--line)}
 .footer-grid>.footer-nav>a{width:max-content;transition:color .25s,transform .25s,text-shadow .25s}
 .footer-nav>a:hover,.footer-nav>a:focus-visible{color:var(--red);transform:translateX(6px);text-shadow:0 0 12px rgba(215,53,46,.7)}
+
+/* Typography: regular titles & buttons, Catchy Mager descriptions */
+@font-face{font-family:'Catchy Mager';src:local('Catchy Mager'),local('CatchyMager-Regular'),url('assets/fonts/CatchyMager.woff2') format('woff2'),url('assets/fonts/CatchyMager.woff') format('woff'),url('assets/fonts/CatchyMager.otf') format('opentype'),url('assets/fonts/CatchyMager.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap}
+:root{--display:'Catchy Mager',Georgia,serif}
+h1,h2,h3,h4,h1 em,h2 em,h3 em{font-family:var(--sans);font-weight:400;font-style:normal}
+.button,.nav-cta,.text-link,.filter,.dev-credit-btn,.credit-btn,button{font-family:var(--sans);font-weight:400;font-style:normal}
+p:not(.eyebrow):not(.footer-label):not(.quote-credit):not(.quote-mark){font-family:var(--display)}
