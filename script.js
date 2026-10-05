@@ -1,3 +1,6 @@
+import {createIcons,ArrowUpRight,ArrowRight,ArrowLeft,ArrowUp,Clapperboard,Aperture,Megaphone,Sparkles,Quote,Menu,X} from 'lucide';
+createIcons({icons:{ArrowUpRight,ArrowRight,ArrowLeft,ArrowUp,Clapperboard,Aperture,Megaphone,Sparkles,Quote,Menu,X}});
+
 const preloader=document.querySelector('.preloader');
 window.addEventListener('load',()=>setTimeout(()=>preloader.classList.add('done'),650));
 
