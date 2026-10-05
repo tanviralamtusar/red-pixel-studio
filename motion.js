@@ -31,7 +31,9 @@ if(!reduce){
     target.classList.add('in','seen');io.unobserve(target);
     if(target.classList.contains('stagger'))setTimeout(()=>target.classList.remove('stagger','in'),target.children.length*90+1200);
   }),{threshold:.15,rootMargin:'0px 0px -6% 0px'});
-  [...headings,...document.querySelectorAll('.wipe,.img-reveal'),...staggers].forEach(el=>io.observe(el));
+  [...headings,...staggers].forEach(el=>io.observe(el));
+  // clip-path hides these from IntersectionObserver, so they're revealed by position in frame()
+  let clipped=[...document.querySelectorAll('.wipe,.img-reveal')];
 
   const startHero=()=>heroTitle.classList.add('in');
   if(root.classList.contains('is-loaded'))startHero();
@@ -54,6 +56,11 @@ if(!reduce){
       heroCopy.style.setProperty('--ho',Math.max(1-y/(vh*.75),0));
       slidesEl.style.translate=`0 ${y*.4}px`;
     }
+    if(clipped.length)clipped=clipped.filter(el=>{
+      const r=el.getBoundingClientRect();
+      if(r.top<vh*.9&&r.bottom>0){el.classList.add('in');return false}
+      return true;
+    });
     parallax.forEach(el=>{
       const r=el.getBoundingClientRect();
       if(r.bottom<-100||r.top>vh+100)return;
