@@ -1,8 +1,9 @@
 import {createIcons,ArrowUpRight,ArrowRight,ArrowLeft,ArrowUp,Clapperboard,Aperture,Megaphone,Sparkles,Quote,Menu,X} from 'lucide';
+import './motion.js';
 createIcons({icons:{ArrowUpRight,ArrowRight,ArrowLeft,ArrowUp,Clapperboard,Aperture,Megaphone,Sparkles,Quote,Menu,X}});
 
 const preloader=document.querySelector('.preloader');
-window.addEventListener('load',()=>setTimeout(()=>preloader.classList.add('done'),650));
+window.addEventListener('load',()=>setTimeout(()=>{preloader.classList.add('done');document.documentElement.classList.add('is-loaded')},650));
 
 const slides=[...document.querySelectorAll('.slide')], nextBtn=document.querySelector('#next'), prevBtn=document.querySelector('#prev');
 const number=document.querySelector('#slideNo'), bar=document.querySelector('#progress');
@@ -30,8 +31,12 @@ hero.addEventListener('touchstart',e=>touchStart=e.changedTouches[0].clientX,{pa
 hero.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-touchStart;if(Math.abs(dx)>45){dx<0?nextBtn.click():prevBtn.click()}},{passive:true});
 
 const menu=document.querySelector('.mobile-nav'), menuBtn=document.querySelector('.menu-btn');
-menuBtn.addEventListener('click',()=>{const open=menu.classList.toggle('open');menuBtn.setAttribute('aria-expanded',open)});
-menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{menu.classList.remove('open');menuBtn.setAttribute('aria-expanded','false')}));
+function setMenu(open){menu.classList.toggle('open',open);menuBtn.setAttribute('aria-expanded',open);document.body.classList.toggle('menu-open',open)}
+menuBtn.addEventListener('click',()=>setMenu(!menu.classList.contains('open')));
+document.addEventListener('keydown',e=>{if(e.key==='Escape')setMenu(false)});
+document.addEventListener('click',e=>{if(menu.classList.contains('open')&&!menu.contains(e.target)&&!menuBtn.contains(e.target))setMenu(false)});
+window.addEventListener('resize',()=>{if(innerWidth>980)setMenu(false)});
+menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
 
 const revealObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');revealObserver.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(e=>revealObserver.observe(e));
